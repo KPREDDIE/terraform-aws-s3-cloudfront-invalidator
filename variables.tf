@@ -9,6 +9,24 @@ variable "region" {
   description = "Working region."
 }
 
+variable "lambda_bucket" {
+  type        = string
+  default     = "ferdaus-uploads"
+  description = "S3 bucket containing the module Lambda source code."
+}
+
+variable "lambda_key" {
+  type        = string
+  default     = "lambda_function.zip"
+  description = "The path to the Lambda ZIP file in the source S3 bucket."
+}
+
+variable "lambda_key_sha256" {
+  type        = string
+  default     = "lambda_function.zip.sha256"
+  description = "The path to the Lambda ZIP file SHA256 hash in the source S3 bucket, generated using: openssl dgst -sha256 -binary lambda_function.zip | openssl enc -base64 > lambda_function.zip.sha256"
+}
+
 variable "tag_Name" {
   type        = string
   description = "Human-friendly name for the project resources."

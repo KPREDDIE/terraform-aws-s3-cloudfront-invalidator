@@ -46,14 +46,19 @@ EOF
   }
 }
 
+data "aws_s3_bucket_object" "function_sha256" {
+  bucket = var.lambda_bucket
+  key    = var.lambda_key_sha256
+}
+
 resource "aws_lambda_function" "function" {
   architectures    = ["arm64"]
-  s3_bucket        = "ferdaus-uploads"
-  s3_key           = "lambda_function.zip"
+  s3_bucket        = var.lambda_bucket
+  s3_key           = var.lambda_key
   function_name    = "${var.bucket_name}EventDetectionLambda"
   role             = aws_iam_role.role.arn
   handler          = "lambda_function.lambda_handler"
-  source_code_hash = filebase64sha256("lambda_function.zip")
+  source_code_hash = chomp(data.aws_s3_bucket_object.function_sha256.body)
   runtime          = "python3.9"
   timeout          = 3
   environment {

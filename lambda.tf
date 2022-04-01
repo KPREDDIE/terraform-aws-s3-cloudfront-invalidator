@@ -63,8 +63,7 @@ resource "aws_lambda_function" "function" {
   timeout          = 3
   environment {
     variables = {
-      BUCKET  = var.bucket_name
-      CF_DIST = var.cloudfront_id
+      CFDIST = var.cloudfront_id
     }
   }
 }

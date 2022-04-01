@@ -36,7 +36,8 @@ def lambda_handler(event, context) -> dict:
         logger = WriteLog({})
 
         # Get path to invalidate from EventBridge.
-        path = '/' + event['path']
+        # path = '/' + event['path']  # from EventBridge
+        path = f"/{event['Records'][0]['object']['key']}"  # from S3
 
         # Create invalidation details.
         quantity = 1

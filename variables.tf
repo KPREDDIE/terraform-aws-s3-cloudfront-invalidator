@@ -6,14 +6,14 @@ variable "lambda_bucket" {
 
 variable "lambda_key" {
   type        = string
-  default     = "lambda_function.zip"
+  default     = "invalidator_function.zip"
   description = "The path to the Lambda ZIP file in the source S3 bucket."
 }
 
 variable "lambda_key_sha256" {
   type        = string
-  default     = "lambda_function.zip.sha256"
-  description = "The path to the Lambda ZIP file SHA256 hash in the source S3 bucket, generated using: openssl dgst -sha256 -binary lambda_function.zip | openssl enc -base64 > lambda_function.zip.sha256"
+  default     = "invalidator_function.zip.sha256.txt"
+  description = "The path to the Lambda ZIP file SHA256 hash in the source S3 bucket, generated using: openssl dgst -sha256 -binary invalidator_function.zip | openssl enc -base64 > invalidator_function.zip.sha256.txt"
 }
 
 variable "bucket_name" {
